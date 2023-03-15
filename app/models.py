@@ -120,6 +120,7 @@ class User(UserMixin, PaginatedAPIMixin, db.Model):
     liked_posts = db.relationship('Post', secondary=likedPosts,
                             backref=db.backref('likers', lazy='dynamic'),
                             lazy='dynamic')
+    authentication = db.Column(db.Boolean, default=False)
     followed = db.relationship(
         'User', secondary=followers,
         primaryjoin=(followers.c.follower_id == id),
